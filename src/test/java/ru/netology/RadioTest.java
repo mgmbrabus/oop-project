@@ -131,4 +131,94 @@ public class RadioTest {
 
         assertEquals(0, radio.getCurrentVolume());
     }
+    @Test
+    public void shouldSetCustomStation() {
+
+        Radio radio = new Radio(30);
+
+        radio.setCurrentStation(29);
+
+        assertEquals(29, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldNotSetStationAboveCustomLimit() {
+
+        Radio radio = new Radio(30);
+
+        radio.setCurrentStation(30);
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldGoToZeroAfterLastCustomStation() {
+
+        Radio radio = new Radio(30);
+
+        radio.setCurrentStation(29);
+
+        radio.next();
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldGoToLastCustomStationBeforeZero() {
+
+        Radio radio = new Radio(30);
+
+        radio.setCurrentStation(0);
+
+        radio.prev();
+
+        assertEquals(29, radio.getCurrentStation());
+    }
+    @Test
+    public void shouldNotSetNegativeStationForCustomRadio() {
+
+        Radio radio = new Radio(30);
+
+        radio.setCurrentStation(-1);
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    public void shouldGoToNextCustomStation() {
+
+        Radio radio = new Radio(30);
+
+        radio.setCurrentStation(15);
+
+        radio.next();
+
+        assertEquals(16, radio.getCurrentStation());
+    }
+    @Test
+    public void shouldSetVolume() {
+
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(50);
+
+        assertEquals(50, radio.getCurrentVolume());
+    }
+    @Test
+    public void shouldNotSetVolumeBelowMin() {
+
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(-1);
+
+        assertEquals(0, radio.getCurrentVolume());
+    }
+    @Test
+    public void shouldNotSetVolumeAboveMax() {
+
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(101);
+
+        assertEquals(0, radio.getCurrentVolume());
+    }
 }
